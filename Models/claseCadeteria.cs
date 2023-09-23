@@ -6,23 +6,28 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Http.HttpResults;
 namespace tl2_tp4_2023_RicardoRobinson1410;
-public class Cadeteria
+
+public static class Singlenton
 {
-    private static Cadeteria cadeteriaSingleton;
+     private static Cadeteria cadeteriaSingleton;
     public static Cadeteria GetCadeteria(string rutaCadeteria, string rutaCadetes)
     {
         if (cadeteriaSingleton == null)
         {
             var cargar = new AccesoADatosJSON();
-            var rand = new Random();
-            var listaCadeterias = cargar.LeerArchivoCadeteriaYCargarCadetes(rutaCadeteria, rutaCadetes);
-            if (listaCadeterias != null)
-            {
-                cadeteriaSingleton = listaCadeterias[rand.Next(0, listaCadeterias.Count())];
-            }
+            var cargarCadeteria=new AccoesoDatosCadeteria();
+            var cargarCadetes=new AccesoDatosCadetes();
+            cadeteriaSingleton=cargarCadeteria.Obtener();
+            cadeteriaSingleton.ListadoCadetes=cargarCadetes.Obtener();
         }
-        return (cadeteriaSingleton);
+        return cadeteriaSingleton;
     }
+}
+
+
+public class Cadeteria
+{
+   
     private string nombre;
     private string telefono;
     private List<Cadete> listadoCadetes;
@@ -198,6 +203,12 @@ public class Cadeteria
                 ped.AsignarCadeteAPedido(cad);
             }
         }
+    }
+
+    public void GuardarPedidos(string nombreArchivo, List<Pedido> listaPedidos)
+    {
+        var guardar=new AccesoDatosPedidos();
+        guardar.Guardar(nombreArchivo,listaPedidos);
     }
 
 

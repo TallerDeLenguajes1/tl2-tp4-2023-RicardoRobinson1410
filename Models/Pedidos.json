@@ -1,0 +1,36 @@
+[
+    {
+        "Nro": 15,
+        "Nombre": "Asado",
+        "NombreCliente": {
+            "Nombre": "Ricardo",
+            "Direccion": "Los Azahares",
+            "Telefono": "3815799440",
+            "DatosReferenciaDireccion": "Lote 17"
+        },
+        "Estado": 1,
+        "CadeteAsignado": {
+            "Telefono": " 9106 Dorcas Key Apt. 517",
+            "Direccion": " 62(4771)629-43-23",
+            "Nombre": "Martin Cordoba",
+            "Id": 15
+        }
+    },
+    {
+        "Nro": 20,
+        "Nombre": "Pan",
+        "NombreCliente": {
+            "Nombre": "Gonzalo",
+            "Direccion": "Los Azahares",
+            "Telefono": "3815799440",
+            "DatosReferenciaDireccion": "Lote 17"
+        },
+        "Estado": 2,
+        "CadeteAsignado": {
+            "Telefono": "",
+            "Direccion": "",
+            "Nombre": "",
+            "Id": 0
+        }
+    }
+]

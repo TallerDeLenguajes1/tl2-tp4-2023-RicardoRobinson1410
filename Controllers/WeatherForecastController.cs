@@ -13,7 +13,7 @@ public class CadeteriaController : ControllerBase
     public CadeteriaController(ILogger<CadeteriaController> logger)
     {
         _logger = logger;
-        cadeteria=Cadeteria.GetCadeteria(@"C:\Users\USUARIO\tl2-tp4-2023-RicardoRobinson1410\Models\Cadeterias.json",@"C:\Users\USUARIO\tl2-tp4-2023-RicardoRobinson1410\Models\Cadetes .json");
+        cadeteria=Singlenton.GetCadeteria(@"C:\Users\USUARIO\tl2-tp4-2023-RicardoRobinson1410\Models\Cadeterias.json",@"C:\Users\USUARIO\tl2-tp4-2023-RicardoRobinson1410\Models\Cadetes .json");
            
     }   
 
@@ -38,6 +38,7 @@ public class CadeteriaController : ControllerBase
     public ActionResult<Pedido> AgregarPedido(Pedido pedido)
     {
         cadeteria.AgregarPedido(pedido);
+        cadeteria.GuardarPedidos("./Models/Pedidos.json",cadeteria.GetPedidos());
         return(Ok(pedido));
     }
 
@@ -46,6 +47,7 @@ public class CadeteriaController : ControllerBase
     public ActionResult<Pedido> AsignarPedido(int idPedido, int idCadete)
     {
         cadeteria.AsignarCadeteaPedidoPorId(idCadete,idPedido);
+        cadeteria.GuardarPedidos("./Models/Pedidos.json",cadeteria.GetPedidos());
         return(Ok(cadeteria.buscarPedidoPorId(idPedido)));
     }
 
@@ -60,6 +62,7 @@ public class CadeteriaController : ControllerBase
          {
             cadeteria.RechazarPedido(idPedido);
          }
+         cadeteria.GuardarPedidos("./Models/Pedidos.json",cadeteria.GetPedidos());
          return(Ok(cadeteria.buscarPedidoPorId(idPedido)));
     }
 
@@ -67,6 +70,7 @@ public class CadeteriaController : ControllerBase
     public ActionResult<Cadete> CambiarCadetePedido(int idPedido, int idNuevoCadete)
     {
         cadeteria.CambiarCadeteAPedido(idPedido,idNuevoCadete);
+        cadeteria.GuardarPedidos("./Models/Pedidos.json",cadeteria.GetPedidos());
         return(Ok(cadeteria.buscarPedidoPorId(idPedido)));
     }
 }
